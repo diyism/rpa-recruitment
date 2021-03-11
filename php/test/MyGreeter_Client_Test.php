@@ -24,6 +24,31 @@ class MyGreeter_Client_Test extends PHPUnit\Framework\TestCase
         );
     }
 
+    public function test_getGreeting_morning()
+    {
+        $this->mock_date('2021-03-11 01:00:00');
+        $this->assertTrue(
+            $this->greeter->getGreeting()==='Good morning'
+        );
+    }
+
+    public function test_getGreeting_afternoon()
+    {
+        $this->mock_date('2021-03-11 13:00:00');
+        $this->assertTrue(
+            $this->greeter->getGreeting()==='Good afternoon'
+        );
+    }
+
+
+    public function test_getGreeting_evening()
+    {
+        $this->mock_date('2021-03-11 23:00:00');
+        $this->assertTrue(
+            $this->greeter->getGreeting()==='Good evening'
+        );
+    }
+
     private function mock_date($mock_datetime)
     {
         runkit_function_rename('date', 'date_real');
