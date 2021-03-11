@@ -1,10 +1,11 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
-class MyGreeter_Client_Test extends \PHPUnit_Framework_TestCase
+class MyGreeter_Client_Test extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
-        $this->greeter = new \MyGreeter\Client();
+        $this->greeter = new MyGreeter\Client();
     }
 
     public function test_Instance()
