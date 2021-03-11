@@ -22,7 +22,3 @@ class Client
          }
     }
 }
-
-
-//$greeter = new \MyGreeter\Client();
-//echo $greeter->getGreeting();
