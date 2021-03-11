@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . "/../lib/MyGreeter.php";
+runkit_function_rename('date', 'date_real');
 
 class MyGreeter_Client_Test extends PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
+        $this->mock_date(date_real('Y-m-d H:i:s'));
         $this->greeter = new MyGreeter\Client();
     }
 
@@ -51,7 +53,7 @@ class MyGreeter_Client_Test extends PHPUnit\Framework\TestCase
 
     private function mock_date($mock_datetime)
     {
-        runkit_function_rename('date', 'date_real');
-        runkit_function_add('date','$format="Y-m-d H:i:s", $timestamp=NULL', '$ts = $timestamp ? $timestamp : strtotime('.$mock_datetime.'); return date_real($format, $ts);');
+        @runkit_function_remove('date');
+        runkit_function_add('date','$format="Y-m-d H:i:s", $timestamp=NULL', '$ts = $timestamp ? $timestamp : strtotime("'.$mock_datetime.'"); return date_real($format, $ts);');
     }
 }
